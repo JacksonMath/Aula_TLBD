@@ -1,6 +1,7 @@
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -23,6 +24,16 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         UpdateUI();
+
+        // Verifica se a cena deixou a flag "LoadSave" como verdadeiro
+        if (PlayerPrefs.GetInt("LoadSave", 0) == 1)
+        {
+            LoadGame(); // Carrega os dados JSON
+
+            // Reseta a flag para 0, para que se o jogador morrer e a cena reiniciar normalmente, não carregue o save de forma acidental
+            PlayerPrefs.SetInt("LoadSave", 0);
+            PlayerPrefs.Save();
+        }
     }
 
     public void UpdateUI()
@@ -49,7 +60,7 @@ public class SaveSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            LoadGame();
+            ReloadSceneWithSave();
         }
     }
 
@@ -68,6 +79,17 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("Jogo salvo com sucesso em: " + saveFilePath);
 
         UpdateUI();
+    }
+
+    public void ReloadSceneWithSave()
+    {
+        // Cria um bilhete dizendo para quando a cena abrir, carregar o save
+        PlayerPrefs.SetInt("LoadSave", 1);
+        PlayerPrefs.Save();
+
+        // Pega o indice da cena atual e recarrega do zero
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void LoadGame()

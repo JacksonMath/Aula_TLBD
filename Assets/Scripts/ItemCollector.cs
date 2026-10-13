@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
-    public PlayerData data;
+    private PlayerData data;
 
     private void OnTriggerEnter(Collider item)
     {
-        if (item != null && item.CompareTag("Item"))
+        if (item.CompareTag("Item"))
         {
             CollectIten();
         }
