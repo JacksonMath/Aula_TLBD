@@ -1588,12 +1588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc037fc7ba84bb84b9c27a4dff3c0617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  data:
-    health: 0
-    positionX: 0
-    positionY: 0
-    positionZ: 0
-    hasCollectedItem: 0
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,7 +1666,7 @@ GameObject:
   - component: {fileID: 1857555943}
   - component: {fileID: 1857555942}
   m_Layer: 0
-  m_Name: CollectableIten
+  m_Name: CollectableItem
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
