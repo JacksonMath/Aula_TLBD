@@ -46,7 +46,7 @@ public class SaveSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && currentHealth >= 0)
         {
             currentHealth -= 10f;
             UpdateUI();
@@ -58,7 +58,7 @@ public class SaveSystem : MonoBehaviour
             SaveGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O) || currentHealth <= 0)
         {
             ReloadSceneWithSave();
         }

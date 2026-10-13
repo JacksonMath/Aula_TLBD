@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
-    private PlayerData data;
-
     private void OnTriggerEnter(Collider item)
     {
         if (item.CompareTag("Item"))
         {
-            CollectIten();
+            CollectItem(item.gameObject);
         }
     }
 
-    public void CollectIten()
+    public void CollectItem(GameObject item)
     {
-        if (data != null && !data.hasCollectedItem)
-        data.hasCollectedItem = true;
+        SaveSystem saveSystem = FindFirstObjectByType<SaveSystem>();
+
+        if (saveSystem != null)
+        {
+            saveSystem.currentPlayer.hasCollectedItem = true;
+
+            saveSystem.UpdateUI();
+
+            Destroy(item);
+        }
     }
 }
